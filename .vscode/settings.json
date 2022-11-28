@@ -1,0 +1,12 @@
+{
+  "[typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "source.organizeImports": true
+    }
+  },
+  "editor.formatOnSave": true,
+  "cSpell.enableFiletypes": ["typescript"],
+  "cSpell.language": "en,pt,pt_BR",
+  "cSpell.words": ["avaliation"]
+}
