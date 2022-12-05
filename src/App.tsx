@@ -1,11 +1,14 @@
 import GlobalStyle from 'common/styles/globalStyles'
+import AppProvider from 'context'
 import Routes from 'routes'
 
 function App() {
   return (
     <>
-      <Routes />
-      <GlobalStyle />
+      <AppProvider>
+        <Routes />
+        <GlobalStyle />
+      </AppProvider>
     </>
   )
 }
