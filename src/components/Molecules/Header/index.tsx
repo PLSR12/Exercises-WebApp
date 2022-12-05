@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { MenuContext } from 'context/menuContext'
+import { useContext, useState } from 'react'
 import { FiMenu } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
-import { Link as Linked } from 'react-scroll'
 import * as S from './styles'
 
-export function Header() {
+export function Header({ data }: any) {
   const [showNav, setShowNav] = useState(false)
+  const { categorySelected, setCategorySelected } = useContext(MenuContext)
   return (
     <>
       <S.MainContainer>
@@ -15,12 +15,13 @@ export function Header() {
             <h2>MOVE</h2>
           </div>
           <S.Nav>
-            <Linked to="about-us" spy={true} smooth={true} offset={-70} duration={500}>
-              Sobre Nós
-            </Linked>
-            <Linked to="make-trip" spy={true} smooth={true} offset={-70} duration={500}>
-              Solicite sua viagem
-            </Linked>
+            {data.map((category: any, index: number) => {
+              return (
+                <a key={index} onClick={() => setCategorySelected(category.id)}>
+                  {category.name}
+                </a>
+              )
+            })}
           </S.Nav>
         </S.ContainerLeft>
         <S.ContainerRight></S.ContainerRight>
@@ -28,20 +29,15 @@ export function Header() {
           <FiMenu onClick={() => setShowNav(!showNav)} />
           {showNav && (
             <nav className={`navHamburguer ${showNav ? 'navTrue' : 'navFalse'}`}>
-              <li>
-                <Linked to="about-us" spy={true} smooth={true} offset={-70} duration={500}>
-                  <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setShowNav(false)}>
-                    Sobre Nós
-                  </Link>
-                </Linked>
-              </li>
-              <li>
-                <Linked to="make-trip" spy={true} smooth={true} offset={-70} duration={500}>
-                  <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setShowNav(false)}>
-                    Solicite sua viagem
-                  </Link>
-                </Linked>
-              </li>
+              {data.map((category: any, index: number) => {
+                return (
+                  <li key={index}>
+                    <a key={index} onClick={() => setCategorySelected(category.id)}>
+                      {category.name}
+                    </a>
+                  </li>
+                )
+              })}
             </nav>
           )}
         </S.MenuHamburguer>
