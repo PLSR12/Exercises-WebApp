@@ -5,6 +5,7 @@ export default function Routes() {
   return (
     <RoutesWrapper>
       <Route path="/" element={<Pages.Home />} />
+      <Route path="/exercise" element={<Pages.Exercise />} />
     </RoutesWrapper>
   )
 }
