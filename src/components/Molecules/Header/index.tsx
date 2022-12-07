@@ -1,16 +1,18 @@
 import { MenuContext } from 'context/menuContext'
 import { useContext, useState } from 'react'
 import { FiMenu } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 
 export function Header({ data }: any) {
   const [showNav, setShowNav] = useState(false)
-  const { categorySelected, setCategorySelected } = useContext(MenuContext)
+  const navigate = useNavigate()
+  const { setCategorySelected } = useContext(MenuContext)
   return (
     <>
       <S.MainContainer>
         <S.ContainerLeft>
-          <div className="title-container">
+          <div className="title-container" onClick={() => navigate('/')}>
             <h1>IN</h1>
             <h2>MOVE</h2>
           </div>
@@ -25,22 +27,24 @@ export function Header({ data }: any) {
           </S.Nav>
         </S.ContainerLeft>
         <S.ContainerRight></S.ContainerRight>
-        <S.MenuHamburguer>
-          <FiMenu onClick={() => setShowNav(!showNav)} />
-          {showNav && (
-            <nav className={`navHamburguer ${showNav ? 'navTrue' : 'navFalse'}`}>
-              {data.map((category: any, index: number) => {
-                return (
-                  <li key={index}>
-                    <a key={index} onClick={() => setCategorySelected(category.id)}>
-                      {category.name}
-                    </a>
-                  </li>
-                )
-              })}
-            </nav>
-          )}
-        </S.MenuHamburguer>
+        {data.length > 0 && (
+          <S.MenuHamburguer>
+            <FiMenu onClick={() => setShowNav(!showNav)} />
+            {showNav && (
+              <nav className={`navHamburguer ${showNav ? 'navTrue' : 'navFalse'}`}>
+                {data.map((category: any, index: number) => {
+                  return (
+                    <li key={index}>
+                      <a key={index} onClick={() => setCategorySelected(category.id)}>
+                        {category.name}
+                      </a>
+                    </li>
+                  )
+                })}
+              </nav>
+            )}
+          </S.MenuHamburguer>
+        )}
       </S.MainContainer>
     </>
   )
