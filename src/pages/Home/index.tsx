@@ -56,13 +56,9 @@ export function Home() {
     getExercises()
   }, [])
 
-  console.log(exercises)
-  console.log(exercisesFiltered, 'filtrado')
-
   return (
     <>
       <S.Container>
-        <h1>HOME</h1>
         <Molecules.LoadingModal loading={modalLoadingIsOpen} />
         <Molecules.Header data={categories} />
         <S.ExercisesContainer>
