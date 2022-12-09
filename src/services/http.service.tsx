@@ -1,7 +1,7 @@
 import axios from 'axios'
-import appsettings from 'common/config/appsettings.json' // aqui está minha URL da API
-import storageService from './storage.service' // importo meu serviço que interagi com o localStoage
-import { ToastService } from './toast.service' // importo meu serviço de toast
+import appsettings from 'common/config/appsettings.json'
+import storageService from './storage.service'
+import { ToastService } from './toast.service'
 
 const HttpService = axios.create({
   baseURL: appsettings.API,
