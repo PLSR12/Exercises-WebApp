@@ -7,6 +7,8 @@ export function Exercise() {
   const [modalLoadingIsOpen, setModalLoadingIsOpen] = React.useState<boolean>(true)
   const location = useLocation()
   const exercise = location.state
+  const exerciseUrl = location.state.linkvideo.replace('watch?v=', 'embed/')
+  // coneversor para deixar url no padrão do iframe com o "embed" no lugar do watch
 
   setInterval(() => {
     setModalLoadingIsOpen(false)
@@ -27,7 +29,7 @@ export function Exercise() {
         </S.ContainerContent>
         <Molecules.Apresentation data={exercise} />
         <S.ContainerVideo>
-          <iframe src={exercise.url} width="100%" scrolling="no" height="100%"></iframe>
+          <iframe src={exerciseUrl} width="100%" height="100%"></iframe>
         </S.ContainerVideo>
       </S.Container>
     </>
