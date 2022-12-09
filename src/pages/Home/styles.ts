@@ -9,12 +9,18 @@ export const ExercisesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  margin-top: 10vh;
   gap: 3vw;
   padding: 4vw;
 
-  .nothing-notice {
-    font-size: 20px;
-    font-weight: bold;
+  .nothing-exercise {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: 45px;
+      font-weight: bold;
+    }
   }
 `

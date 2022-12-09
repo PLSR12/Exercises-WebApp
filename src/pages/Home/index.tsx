@@ -62,9 +62,15 @@ export function Home() {
         <Molecules.LoadingModal loading={modalLoadingIsOpen} />
         <Molecules.Header data={categories} />
         <S.ExercisesContainer>
-          {exercisesFiltered.map((exercise) => (
-            <Molecules.CardExercise key={exercise.id} data={exercise} />
-          ))}
+          {exercisesFiltered.length > 0 ? (
+            exercisesFiltered.map((exercise) => (
+              <Molecules.CardExercise key={exercise.id} data={exercise} />
+            ))
+          ) : (
+            <div className="nothing-exercise">
+              <p>Nenhum exercício nessa categoria</p>
+            </div>
+          )}
         </S.ExercisesContainer>
       </S.Container>
     </>
