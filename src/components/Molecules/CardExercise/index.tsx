@@ -3,25 +3,21 @@ import * as S from './styles'
 
 export function CardExercise({ data }: any) {
   const navigate = useNavigate()
-  console.log(data)
 
   const handleExercise = () => {
     navigate('/exercise', { state: data })
   }
+  const exerciseUrl = data.url.replace('watch?v=', 'embed/')
+
   return (
     <>
       <S.Container onClick={handleExercise}>
         <div className="container-iframe">
-          <iframe
-            width="100%"
-            height="100%"
-            src={data.url}
-            title="YouTube video player"
-            frameBorder="0"
-          ></iframe>
+          <img src={exerciseUrl} alt={`${data.name} imagem`}></img>
         </div>
-
-        <p>{data.name}</p>
+        <S.ContainerText>
+          <h1>{data.name}</h1>
+        </S.ContainerText>
       </S.Container>
     </>
   )
