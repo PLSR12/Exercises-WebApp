@@ -18,6 +18,12 @@ export const Container = styled.div`
     margin-top: 15px;
   }
 
+  hr {
+    color: #a3a3a3;
+    width: 90%;
+    margin-left: 15px;
+  }
+
   .container-iframe {
     display: flex;
     width: 26vw;
@@ -47,11 +53,11 @@ export const ContainerText = styled.div`
 
   h1 {
     flex-wrap: wrap;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 600;
     color: #000000;
     @media (max-width: 1024px) {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
 `

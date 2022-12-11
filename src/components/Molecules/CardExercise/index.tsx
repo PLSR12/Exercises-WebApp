@@ -15,6 +15,7 @@ export function CardExercise({ data }: any) {
         <div className="container-iframe">
           <img src={exerciseUrl} alt={`${data.name} imagem`}></img>
         </div>
+        <hr></hr>
         <S.ContainerText>
           <h1>{data.name}</h1>
         </S.ContainerText>
