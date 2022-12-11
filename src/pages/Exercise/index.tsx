@@ -8,11 +8,11 @@ export function Exercise() {
   const location = useLocation()
   const exercise = location.state
   const exerciseUrl = location.state.linkvideo.replace('watch?v=', 'embed/')
-  // coneversor para deixar url no padrão do iframe com o "embed" no lugar do watch
+  // conversor para deixar url no padrão do iframe com o "embed" no lugar do watch
 
   setInterval(() => {
     setModalLoadingIsOpen(false)
-  }, 1500)
+  }, 2500)
 
   return (
     <>
