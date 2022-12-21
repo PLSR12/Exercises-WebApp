@@ -29,7 +29,7 @@ export const ContainerContent = styled.div`
     h1 {
       font-weight: bold;
       font-size: 4rem;
-      color: #000000;
+      color: ${(props) => props.theme.color.black};
       text-align: left;
     }
     .container-description {
@@ -37,7 +37,7 @@ export const ContainerContent = styled.div`
       align-items: center;
       p {
         font-size: 1rem;
-        color: #000000;
+        color: ${(props) => props.theme.color.black};
         text-align: center;
       }
     }

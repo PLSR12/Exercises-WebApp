@@ -4,10 +4,11 @@ export const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #b5b5b5;
+  border: ${(props) => props.theme.borderWidth.small} solid
+    ${(props) => props.theme.color.second_gray};
   padding: 20px 60px;
   position: fixed;
-  background: #ffffff;
+  background: ${(props) => props.theme.color.white};
   top: 0rem;
   left: 0rem;
   z-index: 10;
@@ -31,12 +32,12 @@ export const ContainerLeft = styled.div`
     h1 {
       font-size: 26px;
       cursor: pointer;
-      color: #ffa600ff;
+      color: ${(props) => props.theme.color.orange};
     }
     h2 {
       font-size: 26px;
       cursor: pointer;
-      color: #a3a3a3;
+      color: ${(props) => props.theme.color.primary_gray};
     }
   }
 `
@@ -114,11 +115,11 @@ export const ContainerRight = styled.div`
   align-items: center;
   gap: 4px;
   > svg {
-    font-size: 20px;
+    font-size: ${(props) => props.theme.fontSize.large};
     cursor: pointer;
   }
   p {
-    font-size: 16px;
+    font-size: ${(props) => props.theme.fontSize.medium};
     cursor: pointer;
   }
 `

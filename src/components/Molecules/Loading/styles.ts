@@ -4,7 +4,7 @@ import { loadingProps } from './types'
 export const Container = styled.div<loadingProps>`
   display: ${(props) => (props.loading ? 'block' : 'none')};
   text-align: center;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.color.white};
   position: absolute;
   top: 50%;
   left: 50%;
@@ -17,7 +17,7 @@ export const Container = styled.div<loadingProps>`
   }
   .loading-text {
     font-size: 24px;
-    color: #a3a3a3;
+    color: ${(props) => props.theme.color.primary_gray};
     font-weight: bold;
   }
 `

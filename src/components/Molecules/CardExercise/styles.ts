@@ -5,9 +5,10 @@ export const Container = styled.div`
   width: 26vw;
   height: 40vh;
   flex-flow: column wrap;
-  border: 2px solid #a3a3a3;
+  border: ${(props) => props.theme.borderWidth.thick} solid
+    ${(props) => props.theme.color.primary_gray};
   margin-top: 5px;
-  border-radius: 5px;
+  border-radius: ${(props) => props.theme.borderRadius.medium};
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 80%);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -19,7 +20,7 @@ export const Container = styled.div`
   }
 
   hr {
-    color: #a3a3a3;
+    color: ${(props) => props.theme.color.primary_gray};
     width: 90%;
     margin-left: 15px;
   }
@@ -55,7 +56,7 @@ export const ContainerText = styled.div`
     flex-wrap: wrap;
     font-size: 2rem;
     font-weight: 600;
-    color: #000000;
+    color: ${(props) => props.theme.color.black};
     @media (max-width: 1024px) {
       font-size: 1rem;
     }
