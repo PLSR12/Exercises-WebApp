@@ -1,10 +1,9 @@
 import axios from 'axios'
-import appsettings from 'common/config/appsettings.json'
 import storageService from './storage.service'
 import { ToastService } from './toast.service'
 
 const HttpService = axios.create({
-  baseURL: appsettings.API,
+  baseURL: process.env.REACT_APP_API_BASE_URL,
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
