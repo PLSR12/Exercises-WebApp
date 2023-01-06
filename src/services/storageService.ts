@@ -1,10 +1,16 @@
-export const storageService = {
+export const StorageService = {
   setUserLoggedIn,
   getAccessToken,
+  setUserLoggedOf,
 }
 
 function setUserLoggedIn(userInfo: any): void {
   localStorage.setItem('exercise:userData', JSON.stringify(userInfo))
+}
+
+function setUserLoggedOf() {
+  localStorage.removeItem('exercise:userData')
+  localStorage.clear()
 }
 
 function getAccessToken() {
@@ -14,4 +20,4 @@ function getAccessToken() {
   return dataUserParsed?.token || ''
 }
 
-export default storageService
+export default StorageService
