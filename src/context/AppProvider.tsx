@@ -5,7 +5,7 @@ interface AppProviderProps {
   children: ReactNode
 }
 
-function AppProvider({ children }: AppProviderProps) {
+const AppProvider = ({ children }: AppProviderProps) => {
   return <MenuProvider>{children}</MenuProvider>
 }
 
