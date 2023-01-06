@@ -1,2 +1,2 @@
-export { CategoryService } from './Categories.service'
-export { ExerciseService } from './Exercises.service'
+export { CategoryService } from './CategoriesService'
+export { ExercisesService } from './ExercisesService'

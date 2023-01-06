@@ -1,4 +1,4 @@
-import { HttpService } from './http.service'
+import { HttpService } from './httpService'
 
 const basePath = '/Category'
 

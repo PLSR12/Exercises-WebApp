@@ -1,6 +1,6 @@
 import axios from 'axios'
-import storageService from './storage.service'
-import { ToastService } from './toast.service'
+import storageService from './storageService'
+import { ToastService } from './toastService'
 
 const HttpService = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,

@@ -1,8 +1,8 @@
-import { HttpService } from './http.service'
+import { HttpService } from './httpService'
 
 const basePath = '/Exercise'
 
-export const ExerciseService = {
+export const ExercisesService = {
   getAll,
   insert,
   update,
@@ -30,4 +30,4 @@ async function getById(id: any) {
   return await HttpService.get(`${basePath}/${id}`)
 }
 
-export default ExerciseService
+export default ExercisesService
