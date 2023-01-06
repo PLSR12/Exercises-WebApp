@@ -1,46 +1,56 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import * as Atoms from 'components/Atoms'
-import { useState } from 'react'
-import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
+import * as Molecules from 'components/Molecules'
+import { UserContext } from 'context/UserContext'
+import * as React from 'react'
+import { useForm } from 'react-hook-form'
 import * as S from './styles'
+import { LogInSchema } from './validations'
 
-export function Login() {
-  const [showPassword, setShowPassword] = useState(false)
+export const Login = () => {
+  const { isOpen, onSubmit } = React.useContext(UserContext)
 
-  const handleShowPassword = () => {
-    setShowPassword((show) => !show)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(LogInSchema),
+  })
+
+  const OnSubmitForm = async (clientData: any) => {
+    onSubmit(clientData)
   }
+
   return (
     <S.Container>
-      <S.ContainerForm>
+      <Molecules.LoadingModal loading={isOpen} />
+      <S.ContainerItens>
         <div className="title-container">
           <h1>IN</h1>
           <h2>MOVE</h2>
         </div>
-        <form>
-          <Atoms.Input label="Email:" />
-          <S.Label> Senha:</S.Label>
-          <div>
-            <S.Input type={showPassword ? 'text' : 'password'} />
-            <span>
-              {showPassword ? (
-                <MdVisibility
-                  color="#c4cdd5"
-                  size={22}
-                  onClick={handleShowPassword}
-                  className="iconVisiblity"
-                />
-              ) : (
-                <MdVisibilityOff
-                  color="#c4cdd5"
-                  size={22}
-                  onClick={handleShowPassword}
-                  className="iconVisiblity"
-                />
-              )}
-            </span>
-          </div>
+        <form onSubmit={handleSubmit(OnSubmitForm)}>
+          <Atoms.InputComponent
+            label="Email:"
+            placeholder="Digite um email válido"
+            {...register('email')}
+            error={errors.email}
+          />
+          <Atoms.InputComponent
+            type="password"
+            label="Senha:"
+            placeholder="Digite uma senha válida"
+            {...register('password')}
+            error={errors.password}
+          />
+
+          <Atoms.ButtonComponent type="submit" size="lg" style={{ marginTop: '50px' }}>
+            {' '}
+            Enviar
+          </Atoms.ButtonComponent>
         </form>
-      </S.ContainerForm>
+      </S.ContainerItens>
     </S.Container>
   )
 }
