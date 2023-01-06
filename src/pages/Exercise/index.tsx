@@ -4,20 +4,20 @@ import { useLocation } from 'react-router-dom'
 import * as S from './styles'
 
 export function Exercise() {
-  const [modalLoadingIsOpen, setModalLoadingIsOpen] = React.useState<boolean>(true)
+  const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const location = useLocation()
   const exercise = location.state
   const exerciseUrl = location.state.linkvideo.replace('watch?v=', 'embed/')
   // conversor para deixar url no padrão do iframe com o "embed" no lugar do watch
 
   setInterval(() => {
-    setModalLoadingIsOpen(false)
+    setIsLoading(false)
   }, 2500)
 
   return (
     <>
       <S.Container>
-        <Molecules.LoadingModal loading={modalLoadingIsOpen} />
+        <Molecules.LoadingModal loading={isLoading} />
         <Molecules.Header data={[]} />
         <S.ContainerContent>
           <div className="container-name">
