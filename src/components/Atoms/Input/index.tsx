@@ -1,23 +1,29 @@
 import React from 'react'
+import { Form } from 'react-bootstrap'
+import { ErrorMessage } from '../ErrorMessage'
 import * as S from './styles'
 
-export const Input: React.FC<any> = React.forwardRef(
+export const InputComponent: React.FC<any> = React.forwardRef(
   ({ type, name, id, placeholder, label, error, ...props }, ref) => {
     return (
       <S.Container>
-        <label htmlFor={name}>{label}</label>
-        <input
-          ref={ref}
-          {...props}
-          name={name}
-          id={id || name}
-          type={type || 'text'}
-          placeholder={placeholder}
-        />
-        {!!error && <div>{error?.message}</div>}
+        <Form>
+          <Form.Group>
+            <Form.Label htmlFor={name}>{label}</Form.Label>
+            <Form.Control
+              ref={ref}
+              {...props}
+              name={name}
+              id={id || name}
+              type={type || 'text'}
+              placeholder={placeholder}
+            />
+          </Form.Group>
+        </Form>
+        {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
       </S.Container>
     )
   }
 )
 
-Input.displayName = 'InputComponent'
+InputComponent.displayName = 'InputComponent'

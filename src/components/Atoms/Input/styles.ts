@@ -19,7 +19,6 @@ export const Container = styled.div`
     border: 1px solid ${(props) => props.theme.color.black};
     overflow: hidden;
     text-overflow: ellipsis;
-
     font-size: 16px;
 
     &:hover::placeholder {
@@ -41,10 +40,5 @@ export const Container = styled.div`
     &:disabled {
       background-color: #dcd4d4;
     }
-  }
-
-  div {
-    color: ${(props) => props.theme.color.red};
-    margin: 5px 0 0 5px;
   }
 `
