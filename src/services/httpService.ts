@@ -1,5 +1,5 @@
 import axios from 'axios'
-import storageService from './storageService'
+import storageService from './StorageService'
 import { ToastService } from './toastService'
 
 const HttpService = axios.create({
@@ -24,37 +24,39 @@ HttpService.interceptors.request.use((config: any) => {
   return config
 })
 
-HttpService.interceptors.response.use(function (response: any) {
-  ;(response.data.messages || []).forEach((resultMessage: { message: string; type: any }) => {
-    if (resultMessage.message) {
-      resultMessage.message = resultMessage.message.replaceAll('P0001: ', '')
-      // const t = i18n.t;
-      switch (resultMessage.type) {
-        case 0:
-        case 'ERROR':
-          ToastService.error(resultMessage.message)
-          break
-        case 1:
-        case 'WARNING':
-          ToastService.warn(resultMessage.message)
-          break
-        case 2:
-        case 'INFO':
-          ToastService.info(resultMessage.message)
-          break
-        case 3:
-        case 'SUCCESS':
-          ToastService.success(resultMessage.message)
-          break
-        default:
-          ToastService.info(resultMessage.message)
-          break
-      }
+HttpService.interceptors.response.use(
+  function (response: any) {
+    switch (response.status) {
+      case 201:
+      case 'SUCCESS':
+        ToastService.success('Operação realizada com sucesso')
+        break
+      case 204:
+      case 'OK':
+        ToastService.success('Operação realizada com sucesso')
+        break
+      case 200:
+      case 'LOGGED':
+        ToastService.success('Login realizado com sucesso')
+        break
+      default:
+        break
     }
-  })
-  if (response.data.redirectRoute) {
-    setTimeout(() => {}, 3000)
+    return response.data
+  },
+  (error) => {
+    console.log(error)
+    if (error.response.status === 401) {
+      ToastService.error('Verifique seu email e senha')
+      throw error
+    } else if (error.response.status === 404) {
+      window.location.href = `/not-found`
+      throw error
+    } else {
+      ToastService.error('Erro ao realizar Operação')
+      throw error
+    }
   }
-  return response.data
-})
+)
+
 export { HttpService }
