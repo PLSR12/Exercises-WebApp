@@ -1,6 +1,6 @@
 import GlobalStyle from 'common/styles/globalStyles'
 import Theme from 'common/styles/Theme'
-import AppProvider from 'context'
+import AppProvider from 'context/AppProvider'
 import Routes from 'routes'
 import { ThemeProvider } from 'styled-components'
 
