@@ -1,4 +1,5 @@
 import { MenuContext } from 'context/menuContext'
+import { map } from 'lodash'
 import { useContext, useState } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
@@ -17,7 +18,7 @@ export function Header({ data }: any) {
             <h2>MOVE</h2>
           </div>
           <S.Nav>
-            {data.map((category: any, index: number) => {
+            {map(data, (category: any, index: number) => {
               return (
                 <a key={index} onClick={() => setCategorySelected(category.id)}>
                   {category.name}
@@ -27,24 +28,22 @@ export function Header({ data }: any) {
           </S.Nav>
         </S.ContainerLeft>
         <S.ContainerRight></S.ContainerRight>
-        {data.length > 0 && (
-          <S.MenuHamburguer>
-            <FiMenu onClick={() => setShowNav(!showNav)} />
-            {showNav && (
-              <nav className={`navHamburguer ${showNav ? 'navTrue' : 'navFalse'}`}>
-                {data.map((category: any, index: number) => {
-                  return (
-                    <li key={index}>
-                      <a key={index} onClick={() => setCategorySelected(category.id)}>
-                        {category.name}
-                      </a>
-                    </li>
-                  )
-                })}
-              </nav>
-            )}
-          </S.MenuHamburguer>
-        )}
+        <S.MenuHamburguer>
+          <FiMenu onClick={() => setShowNav(!showNav)} />
+          {showNav && (
+            <nav className={`navHamburguer ${showNav ? 'navTrue' : 'navFalse'}`}>
+              {map(data, (category: any, index: number) => {
+                return (
+                  <li key={index}>
+                    <a key={index} onClick={() => setCategorySelected(category.id)}>
+                      {category.name}
+                    </a>
+                  </li>
+                )
+              })}
+            </nav>
+          )}
+        </S.MenuHamburguer>
       </S.MainContainer>
     </>
   )
