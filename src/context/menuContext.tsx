@@ -11,7 +11,7 @@ interface IMenuProvider {
 
 export const MenuContext = React.createContext<IMenuContext>({} as IMenuContext)
 
-export function MenuProvider({ children }: IMenuProvider) {
+export const MenuProvider = ({ children }: IMenuProvider) => {
   const [categorySelected, setCategorySelected] = React.useState<number>(0)
 
   return (
