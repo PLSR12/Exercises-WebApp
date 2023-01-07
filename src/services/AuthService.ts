@@ -1,4 +1,4 @@
-import { HttpService } from './httpService'
+import { HttpServiceLogin } from './httpService'
 
 const basePath = '/sessions'
 
@@ -11,6 +11,6 @@ interface AuthProps {
 }
 
 async function signIn(data: AuthProps) {
-  return await HttpService.post(`${basePath}`, data)
+  return await HttpServiceLogin.post(`${basePath}`, data)
 }
 export default AuthService
