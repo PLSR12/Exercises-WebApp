@@ -1,14 +1,22 @@
 import { MenuContext } from 'context/menuContext'
 import { map } from 'lodash'
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FiMenu } from 'react-icons/fi'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as S from './styles'
+import UserConfig from './UserConfig'
 
 export function Header({ data }: any) {
   const [showNav, setShowNav] = useState(false)
   const navigate = useNavigate()
   const { setCategorySelected } = useContext(MenuContext)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+
+  const location = useLocation()
+
+  React.useEffect(() => {
+    setIsVisible(false)
+  }, [location])
   return (
     <>
       <S.MainContainer>
@@ -27,7 +35,7 @@ export function Header({ data }: any) {
             })}
           </S.Nav>
         </S.ContainerLeft>
-        <S.ContainerRight></S.ContainerRight>
+
         <S.MenuHamburguer>
           <FiMenu onClick={() => setShowNav(!showNav)} />
           {showNav && (
@@ -44,6 +52,9 @@ export function Header({ data }: any) {
             </nav>
           )}
         </S.MenuHamburguer>
+        <S.ContainerRight>
+          <UserConfig isVisible={isVisible} setIsVisible={setIsVisible} />
+        </S.ContainerRight>
       </S.MainContainer>
     </>
   )
