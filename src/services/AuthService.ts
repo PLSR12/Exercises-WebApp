@@ -1,4 +1,5 @@
 import { HttpServiceLogin } from './httpService'
+import StorageService from './StorageService'
 
 const basePath = '/sessions'
 
@@ -11,6 +12,9 @@ interface AuthProps {
 }
 
 async function signIn(data: AuthProps) {
-  return await HttpServiceLogin.post(`${basePath}`, data)
+  return HttpServiceLogin.post(`${basePath}`, data).then((response) =>
+    StorageService.setUserLoggedIn(response)
+  )
 }
+
 export default AuthService

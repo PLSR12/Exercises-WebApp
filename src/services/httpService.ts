@@ -31,29 +31,6 @@ HttpService.interceptors.request.use((config: any) => {
   return config
 })
 
-HttpServiceLogin.interceptors.response.use(
-  function (response: any) {
-    switch (response.status) {
-      case 200:
-      case 'LOGGED':
-        ToastService.success('Login realizado com sucesso')
-        break
-      default:
-        break
-    }
-    return response.data
-  },
-  (error) => {
-    if (error.response.status === 401) {
-      ToastService.error('Verifique seu email e senha')
-      throw error
-    } else {
-      ToastService.error('Erro ao realizar Operação')
-      throw error
-    }
-  }
-)
-
 HttpService.interceptors.response.use(
   function (response: any) {
     switch (response.status) {
@@ -76,6 +53,29 @@ HttpService.interceptors.response.use(
       throw error
     } else {
       ToastService.error('Erro ao realizar Operação')
+      throw error
+    }
+  }
+)
+
+HttpServiceLogin.interceptors.response.use(
+  function (response: any) {
+    switch (response.status) {
+      case 200:
+      case 'SUCCESS':
+        ToastService.success('Login Realizado com Sucesso')
+        break
+      default:
+        break
+    }
+    return response.data
+  },
+  (error) => {
+    if (error.response.status === 404) {
+      window.location.href = `/not-found`
+      throw error
+    } else {
+      ToastService.error('Verifique seu email e senha')
       throw error
     }
   }
