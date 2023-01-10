@@ -19,7 +19,7 @@ export const Login = () => {
   })
 
   const OnSubmitForm = async (clientData: any) => {
-    onSubmit(clientData)
+    await onSubmit(clientData)
   }
 
   return (
