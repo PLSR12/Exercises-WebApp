@@ -6,6 +6,7 @@ const Theme = {
     orange: '#ffa600ff',
     second_gray: '#b5b5b5',
     red: '#d90f06',
+    background_paper: '#f0f0f0',
   },
 
   borderRadius: {
