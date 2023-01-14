@@ -5,6 +5,7 @@ export const Container = styled.section`
   width: 100%;
   height: 100vh;
   justify-content: center;
+  background-color: ${(props) => props.theme.color.background_paper};
 `
 export const ExercisesContainer = styled.div`
   display: flex;
