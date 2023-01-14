@@ -1,6 +1,7 @@
-import { UserContext } from 'context/UserContext'
+import { AuditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
-import { IconLogout, IconProfile } from '../../../Icons'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from 'store/context/UserContext'
 import * as S from './styles'
 
 interface UserConfigProps {
@@ -12,11 +13,8 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
   const thumbProfileRef = useRef<HTMLButtonElement>(null)
   const menuProfileRef = useRef<HTMLDivElement>(null)
   const [initials, setInitials] = useState<string>('')
+  const navigate = useNavigate()
   const { logoutUser, user } = useContext(UserContext)
-
-  useEffect(() => {
-    getInitials(user.name)
-  }, [])
 
   const keyPress = useCallback(
     (e: { key: string }) => {
@@ -47,6 +45,10 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
     setIsVisible(!isVisible)
   }
 
+  const redirectAdmin = () => {
+    navigate('/admin')
+  }
+
   useEffect(() => {
     document.addEventListener('keydown', keyPress)
     document.addEventListener('click', showMenuProfile, true)
@@ -57,35 +59,49 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
     }
   }, [keyPress])
 
+  useEffect(() => {
+    getInitials(user.name)
+  }, [user])
+
   return (
     <S.Container>
-      <S.ThumbUserLogged onClick={() => changeVisibility()} ref={thumbProfileRef}>
-        <p>{initials}</p>
-      </S.ThumbUserLogged>
+      <>
+        <S.ThumbUserLogged onClick={() => changeVisibility()} ref={thumbProfileRef}>
+          <p>{initials}</p>
+        </S.ThumbUserLogged>
 
-      <S.NavProfileOpitions
-        isVisible={isVisible}
-        ref={menuProfileRef}
-        onClick={() => setIsVisible(true)}
-      >
-        <S.ProfileContainer>
-          <S.HeaderProfile>
-            <h4>{user?.name}</h4>
-            <p>{user?.email}</p>
-          </S.HeaderProfile>
+        <S.NavProfileOpitions
+          isVisible={isVisible}
+          ref={menuProfileRef}
+          onClick={() => setIsVisible(true)}
+        >
+          <S.ProfileContainer>
+            <S.HeaderProfile>
+              <h4>{user?.name}</h4>
+              <p>{user?.email}</p>
+            </S.HeaderProfile>
 
-          <S.BodyProfile>
-            <button type="button" disabled>
-              <IconProfile /> <p>Perfil</p>
-            </button>
-          </S.BodyProfile>
-          <S.FooterProfile>
-            <button type="button" className="btnLogout" onClick={() => logoutUser()}>
-              <IconLogout /> <p>Sair</p>
-            </button>
-          </S.FooterProfile>
-        </S.ProfileContainer>
-      </S.NavProfileOpitions>
+            <S.BodyProfile>
+              <button type="button" disabled>
+                <UserOutlined /> <p>Perfil</p>
+              </button>
+            </S.BodyProfile>
+            {user.admin && (
+              <S.FooterProfile>
+                <button type="button" onClick={() => redirectAdmin()}>
+                  <AuditOutlined /> <p>Admin</p>
+                </button>
+              </S.FooterProfile>
+            )}
+
+            <S.FooterProfile>
+              <button type="button" className="btnLogout" onClick={() => logoutUser()}>
+                <LogoutOutlined /> <p>Sair</p>
+              </button>
+            </S.FooterProfile>
+          </S.ProfileContainer>
+        </S.NavProfileOpitions>
+      </>
     </S.Container>
   )
 }
