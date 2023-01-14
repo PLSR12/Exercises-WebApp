@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button } from 'react-bootstrap'
+import { Button } from 'antd'
 
 export const ButtonStyled = styled(Button)`
   background-color: ${(props) => props.theme.color.orange};

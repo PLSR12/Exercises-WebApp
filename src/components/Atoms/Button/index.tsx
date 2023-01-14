@@ -1,8 +1,8 @@
 import * as S from './styles'
 
-export const ButtonComponent = ({ children, ...props }: any) => {
+export const ButtonComponent = ({ children, type, ...props }: any) => {
   return (
-    <S.ButtonStyled variant="secondary" type="text" {...props}>
+    <S.ButtonStyled type={type || 'text'} {...props}>
       {children}
     </S.ButtonStyled>
   )
