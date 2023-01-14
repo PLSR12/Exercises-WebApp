@@ -1,24 +1,31 @@
+import { LockOutlined, UnlockOutlined, UserOutlined } from '@ant-design/icons'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Atoms from 'components/Atoms'
 import * as Molecules from 'components/Molecules'
 import { UserContext } from 'context/UserContext'
+import { IUserInput } from 'models/IUser'
 import * as React from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import * as S from './styles'
 import { LogInSchema } from './validations'
 
 export const Login = () => {
+  const [showPassword, setShowPassword] = React.useState<boolean>(false)
   const { isOpen, onSubmit } = React.useContext(UserContext)
 
   const {
-    register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm<any>({
+  } = useForm<IUserInput>({
     resolver: yupResolver(LogInSchema),
   })
 
-  const OnSubmitForm = async (clientData: any) => {
+  const handleShowPassword = () => {
+    setShowPassword((show) => !show)
+  }
+
+  const OnSubmitForm = async (clientData: IUserInput) => {
     await onSubmit(clientData)
   }
 
@@ -26,27 +33,52 @@ export const Login = () => {
     <S.Container>
       <Molecules.LoadingModal loading={isOpen} />
       <S.ContainerItens>
-        <div className="title-container">
-          <h1>IN</h1>
-          <h2>MOVE</h2>
-        </div>
         <form onSubmit={handleSubmit(OnSubmitForm)}>
-          <Atoms.InputComponent
-            label="Email:"
-            placeholder="Digite um email válido"
-            {...register('email')}
-            error={errors.email}
+          <div className="title-container">
+            <h1>IN</h1>
+            <h2>MOVE</h2>
+          </div>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <Atoms.InputComponent
+                {...field}
+                label="Email:"
+                placeholder="Digite um email válido"
+                error={errors.email}
+                prefix={<UserOutlined className="site-form-item-icon" />}
+              />
+            )}
           />
-          <Atoms.InputComponent
-            type="password"
-            label="Senha:"
-            placeholder="Digite uma senha válida"
-            {...register('password')}
-            error={errors.password}
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <Atoms.InputComponent
+                {...field}
+                type={showPassword ? 'text' : 'password'}
+                label="Senha:"
+                placeholder="Digite uma senha válida"
+                error={errors.password}
+                prefix={
+                  showPassword ? (
+                    <UnlockOutlined
+                      className="site-form-item-icon"
+                      onClick={() => handleShowPassword()}
+                    />
+                  ) : (
+                    <LockOutlined
+                      className="site-form-item-icon"
+                      onClick={() => handleShowPassword()}
+                    />
+                  )
+                }
+              />
+            )}
           />
 
-          <Atoms.ButtonComponent type="submit" size="lg" style={{ marginTop: '50px' }}>
-            {' '}
+          <Atoms.ButtonComponent htmlType="submit" style={{ marginTop: '50px' }}>
             Enviar
           </Atoms.ButtonComponent>
         </form>
