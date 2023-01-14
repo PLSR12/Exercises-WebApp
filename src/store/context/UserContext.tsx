@@ -1,7 +1,7 @@
 import { IUserContext, IUserInput } from 'models/IUser'
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthService, StorageService } from 'services'
+import { AuthService, StorageService } from 'store/services'
 
 interface IUserProvider {
   children: React.ReactNode
@@ -18,9 +18,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
     setIsOpen(true)
     await AuthService.signIn(values)
       .then(() => {
-        setTimeout(() => {
-          navigate('/')
-        }, 2000)
+        navigate('/')
       })
       .finally(() => {
         setIsOpen(false)
@@ -29,14 +27,13 @@ export const UserProvider = ({ children }: IUserProvider) => {
 
   const logoutUser = () => {
     StorageService.setUserLoggedOf()
-    setUser(undefined)
+    setUser({})
   }
 
-  const userLocal = localStorage.getItem('exercise:userData')
-
   React.useEffect(() => {
-    setUser(userLocal)
-  }, [userLocal])
+    const userParsed = StorageService.getDataUser()
+    setUser(userParsed)
+  }, [])
 
   return (
     <>

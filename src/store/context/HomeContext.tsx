@@ -3,7 +3,7 @@ import { AllCategories } from 'models/ICategories'
 import { AllExercises, IExercisesContext } from 'models/IExercises'
 import * as Pages from 'pages'
 import * as React from 'react'
-import { CategoryService, ExercisesService } from 'services'
+import { CategoryService, ExercisesService } from 'store/services'
 import { MenuContext } from './menuContext'
 
 export const HomeContext = React.createContext<IExercisesContext>({} as IExercisesContext)
