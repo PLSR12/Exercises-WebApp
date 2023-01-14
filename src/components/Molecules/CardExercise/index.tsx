@@ -1,5 +1,7 @@
+import { Card } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import * as S from './styles'
+
+const { Meta } = Card
 
 export function CardExercise({ data }: any) {
   const navigate = useNavigate()
@@ -11,15 +13,20 @@ export function CardExercise({ data }: any) {
 
   return (
     <>
-      <S.Container onClick={handleExercise}>
-        <div className="container-iframe">
-          <img src={exerciseUrl} alt={`${data.name} imagem`}></img>
-        </div>
-        <hr></hr>
-        <S.ContainerText>
-          <h1>{data.name}</h1>
-        </S.ContainerText>
-      </S.Container>
+      <Card
+        style={{ height: 'min-content' }}
+        hoverable
+        cover={
+          <img
+            src={exerciseUrl}
+            alt={`${data.name} imagem`}
+            style={{ width: '300px', height: '30vh' }}
+          />
+        }
+        onClick={handleExercise}
+      >
+        <Meta title={data.name} description={data.objective} />
+      </Card>
     </>
   )
 }
