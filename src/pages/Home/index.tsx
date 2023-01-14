@@ -1,6 +1,6 @@
 import * as Molecules from 'components/Molecules'
-import { HomeContext } from 'context/HomeContext'
 import React from 'react'
+import { HomeContext } from 'store/context/HomeContext'
 import * as S from './styles'
 
 export const Home = () => {

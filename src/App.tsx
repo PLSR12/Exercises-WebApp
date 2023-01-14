@@ -1,8 +1,8 @@
 import GlobalStyle from 'common/styles/globalStyles'
 import Theme from 'common/styles/Theme'
-import AppProvider from 'context/AppProvider'
 import { ToastContainer } from 'react-toastify'
 import Routes from 'routes'
+import AppProvider from 'store/context/AppProvider'
 import { ThemeProvider } from 'styled-components'
 
 function App() {

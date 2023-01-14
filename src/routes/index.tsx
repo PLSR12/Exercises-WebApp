@@ -1,6 +1,6 @@
 import { Path } from 'common/config/pathsRoutes'
-import * as Providers from 'context'
 import { Route, Routes as RoutesWrapper } from 'react-router-dom'
+import * as Providers from 'store/context'
 import * as Pages from '../pages'
 import PrivateRoute from './private-routes'
 

@@ -1,8 +1,8 @@
-import { MenuContext } from 'context/menuContext'
 import { map } from 'lodash'
 import React, { useContext, useState } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { MenuContext } from 'store/context/menuContext'
 import * as S from './styles'
 import UserConfig from './UserConfig'
 
