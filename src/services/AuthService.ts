@@ -12,7 +12,7 @@ interface AuthProps {
 }
 
 async function signIn(data: AuthProps) {
-  return HttpServiceLogin.post(`${basePath}`, data).then((response) =>
+  HttpServiceLogin.post(`${basePath}`, data).then((response: any) =>
     StorageService.setUserLoggedIn(response)
   )
 }
