@@ -21,4 +21,9 @@ interface IExercisesContext {
   exercisesFiltered: AllExcercises[]
 }
 
-export { AllExercises, IExercisesContext }
+interface IExercisesListContext {
+  isLoading: boolean
+  exercises: AllExercises[]
+}
+
+export { AllExercises, IExercisesContext, IExercisesListContext }
