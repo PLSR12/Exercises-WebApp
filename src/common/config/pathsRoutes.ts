@@ -4,4 +4,5 @@ export const Path = {
   Exercise: '/exercise',
   Admin: '/admin',
   ListExercises: '/list-exercises',
+  EditExercise: '/edit-exercise/:id',
 }
