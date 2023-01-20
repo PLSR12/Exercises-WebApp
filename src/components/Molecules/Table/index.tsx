@@ -1,10 +1,11 @@
 import { Table } from 'antd'
+import * as S from './styles'
 
 export const TableComponent = ({ data, columns, title }: any) => {
   return (
-    <div>
-      <h1> {title} </h1>
-      <Table dataSource={data} columns={columns} />;
-    </div>
+    <S.Container>
+      <h1>{title}</h1>
+      <Table dataSource={data} columns={columns} />
+    </S.Container>
   )
 }
