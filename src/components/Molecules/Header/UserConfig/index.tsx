@@ -1,4 +1,5 @@
 import { AuditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { Path } from 'common/config/pathsRoutes'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from 'store/context/UserContext'
@@ -46,7 +47,7 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
   }
 
   const redirectAdmin = () => {
-    navigate('/admin')
+    navigate(Path.ListExercises)
   }
 
   useEffect(() => {
