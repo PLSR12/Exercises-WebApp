@@ -18,7 +18,9 @@ export const UserProvider = ({ children }: IUserProvider) => {
     setIsOpen(true)
     await AuthService.signIn(values)
       .then(() => {
-        navigate('/')
+        setInterval(() => {
+          navigate('/')
+        }, 2000)
       })
       .finally(() => {
         setIsOpen(false)
