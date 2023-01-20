@@ -1,4 +1,5 @@
 import { Path } from 'common/config/pathsRoutes'
+import { LayoutAdmin } from 'pages/Admin'
 import { Route, Routes as RoutesWrapper } from 'react-router-dom'
 import * as Providers from 'store/context'
 import * as Pages from '../pages'
@@ -20,6 +21,17 @@ const Routes = () => {
         element={
           <PrivateRoute>
             <Pages.Exercise />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path={Path.ListExercises}
+        element={
+          <PrivateRoute>
+            <LayoutAdmin>
+              <Providers.ExercisesProvider />
+            </LayoutAdmin>
           </PrivateRoute>
         }
       />
