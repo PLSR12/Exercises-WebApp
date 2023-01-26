@@ -10,7 +10,7 @@ interface IUserProvider {
 export const UserContext = React.createContext<IUserContext>({} as IUserContext)
 
 export const UserProvider = ({ children }: IUserProvider) => {
-  const [user, setUser] = React.useState<any>({})
+  const [user, setUser] = React.useState<any>()
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
     setIsOpen(true)
     await AuthService.signIn(values)
       .then(() => {
-        setInterval(() => {
+        setTimeout(() => {
           navigate('/')
         }, 2000)
       })
@@ -29,7 +29,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
 
   const logoutUser = () => {
     StorageService.setUserLoggedOf()
-    setUser({})
+    setUser(undefined)
   }
 
   React.useEffect(() => {
