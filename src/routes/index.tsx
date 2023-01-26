@@ -36,6 +36,28 @@ const Routes = () => {
         }
       />
 
+      <Route
+        path={Path.CreateExercise}
+        element={
+          <PrivateRoute>
+            <LayoutAdmin>
+              <Providers.ExerciseProvider />
+            </LayoutAdmin>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path={Path.EditExercise}
+        element={
+          <PrivateRoute>
+            <LayoutAdmin>
+              <Providers.ExerciseProvider />
+            </LayoutAdmin>
+          </PrivateRoute>
+        }
+      />
+
       <Route path={Path.Login} element={<Pages.Login />} />
       <Route path="*" element={<Pages.notFound />} />
     </RoutesWrapper>
