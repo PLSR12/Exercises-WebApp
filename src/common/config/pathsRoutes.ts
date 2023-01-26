@@ -5,4 +5,5 @@ export const Path = {
   Admin: '/admin',
   ListExercises: '/list-exercises',
   EditExercise: '/edit-exercise/:id',
+  CreateExercise: '/create-exercise',
 }
