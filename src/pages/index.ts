@@ -1,4 +1,6 @@
 export { Home } from './Home'
+export { ListExercises } from './AdminExercises/List'
 export { Exercise } from './Exercise'
 export { Login } from './Login'
 export { notFound } from './NotFound'
+export { CreateOrEditExercise } from './AdminExercises/CreateOrEdit'
