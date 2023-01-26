@@ -1,11 +1,10 @@
-import { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
-import { UserContext } from 'store/context/UserContext'
+import StorageService from 'store/services/StorageService'
 
 const PrivateRoute = ({ children }: any) => {
-  const { user } = useContext(UserContext)
+  const userParsed = StorageService.getDataUser()
 
-  if (!user) {
+  if (!userParsed) {
     return <Navigate to="/login" />
   }
 
