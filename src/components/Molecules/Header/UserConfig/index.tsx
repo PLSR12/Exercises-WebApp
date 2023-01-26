@@ -61,7 +61,7 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
   }, [keyPress])
 
   useEffect(() => {
-    getInitials(user.name)
+    getInitials(user?.name || '')
   }, [user])
 
   return (
@@ -87,7 +87,7 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
                 <UserOutlined /> <p>Perfil</p>
               </button>
             </S.BodyProfile>
-            {user.admin && (
+            {user?.admin && (
               <S.FooterProfile>
                 <button type="button" onClick={() => redirectAdmin()}>
                   <AuditOutlined /> <p>Admin</p>
