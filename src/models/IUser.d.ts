@@ -1,5 +1,5 @@
 interface IUserContext {
-  user: IUser
+  user?: IUser
   onSubmit: (values: IUserInput) => void
   logoutUser: () => void
   isOpen: boolean

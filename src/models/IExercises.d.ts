@@ -21,9 +21,18 @@ interface IExercisesContext {
   exercisesFiltered: AllExcercises[]
 }
 
+interface IExerciseContext {
+  isLoading: boolean
+  categories: AllCategories[]
+  onSubmit: (values: any) => void
+  isCreate: boolean
+}
+
 interface IExercisesListContext {
   isLoading: boolean
   exercises: AllExercises[]
+  handleNew: () => void
+  handleEdit: (data: any) => void
 }
 
-export { AllExercises, IExercisesContext, IExercisesListContext }
+export { AllExercises, IExercisesContext, IExercisesListContext, IExerciseContext }
