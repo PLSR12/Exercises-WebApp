@@ -1,15 +1,15 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { Space } from 'antd'
-import { Path } from 'common/config/pathsRoutes'
+import * as Atoms from 'components/Atoms'
 import * as Molecules from 'components/Molecules'
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ExercisesContext } from 'store/context/ExercisesContext'
 import * as S from './styles'
 
-export const Exercises = () => {
+export const ListExercises = () => {
   const navigate = useNavigate()
-  const { isLoading, exercises } = React.useContext(ExercisesContext)
+  const { isLoading, exercises, handleNew, handleEdit } = React.useContext(ExercisesContext)
   const [data, setData] = React.useState<any[]>([])
 
   React.useEffect(() => {
@@ -38,9 +38,9 @@ export const Exercises = () => {
       title: 'Action',
       dataIndex: 'operation',
       key: 'operation',
-      render: () => (
+      render: (t: any, r: any) => (
         <Space size="middle">
-          <EditOutlined onClick={() => navigate(Path.EditExercise)} />
+          <EditOutlined onClick={() => handleEdit(r)} />
           <DeleteOutlined />
         </Space>
       ),
@@ -50,7 +50,19 @@ export const Exercises = () => {
   return (
     <S.Container>
       <Molecules.LoadingModal loading={isLoading} />
-      <Molecules.TableComponent data={data} columns={columns} title={'Listagem de Exercícios'} />
+      <Molecules.TableComponent
+        data={data}
+        columns={columns}
+        title={'Exercícios'}
+        subTitle={'Listagem de Exercícios'}
+        extraButton={
+          <>
+            <Atoms.ButtonComponent onClick={handleNew}>
+              Cadastrar <PlusOutlined />
+            </Atoms.ButtonComponent>
+          </>
+        }
+      />
     </S.Container>
   )
 }
