@@ -1,6 +1,8 @@
+import { Path } from 'common/config/pathsRoutes'
 import { AllExercises, IExercisesListContext } from 'models/IExercises'
-import { Exercises } from 'pages/Exercises'
+import * as Pages from 'pages'
 import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { exercisesListMapper } from 'store/mapper/exercisesMapper'
 import { ExercisesService } from 'store/services'
 
@@ -11,6 +13,7 @@ export const ExercisesContext = React.createContext<IExercisesListContext>(
 export const ExercisesProvider = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [exercises, setExercises] = React.useState<AllExercises[]>([])
+  const navigate = useNavigate()
 
   const getExercises = async () => {
     try {
@@ -23,6 +26,14 @@ export const ExercisesProvider = () => {
     }
   }
 
+  const handleNew = () => {
+    navigate(Path.CreateExercise)
+  }
+
+  const handleEdit = (data: any) => {
+    navigate(`/edit-exercise/:${data.id}`, { state: data })
+  }
+
   React.useEffect(() => {
     getExercises()
   }, [])
@@ -33,9 +44,11 @@ export const ExercisesProvider = () => {
         value={{
           isLoading,
           exercises,
+          handleNew,
+          handleEdit,
         }}
       >
-        <Exercises />
+        <Pages.ListExercises />
       </ExercisesContext.Provider>
     </>
   )
