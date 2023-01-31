@@ -24,7 +24,7 @@ interface IExercisesContext {
 interface IExerciseContext {
   isLoading: boolean
   categories: AllCategories[]
-  onSubmit: (values: any) => void
+  onSubmit: (values: any, file: any) => void
   isCreate: boolean
 }
 
