@@ -1,18 +1,33 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { UploadProps } from 'antd'
 import { Path } from 'common/config/pathsRoutes'
 import { formatDataSelectComponent } from 'common/utils/formatDataSelect'
 import * as Atoms from 'components/Atoms'
+import * as Molecules from 'components/Molecules'
 import * as React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ExerciseContext } from 'store/context/ExerciseContext'
 import * as S from './styles'
+import { ExerciseSchema } from './validations'
 
 export const CreateOrEditExercise = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const exercise = location.state
+  const exerciseFile = exercise
+    ? [
+        {
+          uid: '-1',
+          name: exercise?.name,
+          status: 'done',
+          url: exercise?.file,
+        },
+      ]
+    : []
+  const [fileList, setFileList] = React.useState<any[]>(exerciseFile)
+  const [file, setFile] = React.useState<any>()
   const { isLoading, categories, onSubmit, isCreate } = React.useContext(ExerciseContext)
-  console.log(exercise)
 
   React.useEffect(() => {
     if (exercise) {
@@ -20,19 +35,22 @@ export const CreateOrEditExercise = () => {
     }
   }, [])
 
+  const onChangeInput: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    setFileList(newFileList)
+  }
+
   const {
     reset,
     handleSubmit,
+    setValue,
     control,
     formState: { errors },
-  } = useForm<any>({})
+  } = useForm<any>({
+    resolver: yupResolver(ExerciseSchema),
+  })
 
   const OnSubmitForm = async (values: any) => {
-    await onSubmit(values)
-  }
-
-  const onChange = (value: string) => {
-    console.log(`selected ${value}`)
+    await onSubmit(values, file)
   }
 
   const onSearch = (value: string) => {
@@ -45,6 +63,7 @@ export const CreateOrEditExercise = () => {
 
   return (
     <S.Container>
+      <Molecules.LoadingModal loading={isLoading} />
       <h1>{isCreate ? 'Cadastro de Exercício' : 'Edição de Exercício'}</h1>
       <form onSubmit={handleSubmit(OnSubmitForm)}>
         <S.BoxAreaForm>
@@ -105,13 +124,23 @@ export const CreateOrEditExercise = () => {
               <Atoms.SelectComponent
                 {...field}
                 label="Categoria"
+                defaultValue={exercise?.categoryId}
                 options={formatDataSelectComponent(categories)}
                 placeholder="Selecione uma Categoria:"
                 error={errors.categoryId}
-                onChange={onChange}
+                onChange={(value: any) => setValue('categoryId', value)}
                 onSearch={onSearch}
               />
             )}
+          />
+          <input type="file" onChange={(e: any) => setFile(e.target.files[0]?.name)} />
+          <Atoms.InputImage
+            name="imagem"
+            label="Imagem do exercício"
+            error={errors.file}
+            onChange={onChangeInput}
+            fileList={fileList}
+            maximumFiles={1}
           />
         </S.BoxAreaForm>
         <div className="buttonsStepper" style={{ marginTop: '40px' }}>
