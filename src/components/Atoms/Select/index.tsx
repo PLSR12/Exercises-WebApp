@@ -4,7 +4,7 @@ import { ErrorMessage } from '../ErrorMessage'
 import * as S from './styles'
 
 export const SelectComponent: React.FC<any> = React.forwardRef(
-  ({ name, id, placeholder, onSearch, onChange, label, error, options }, ref) => {
+  ({ name, id, placeholder, defaultValue, onSearch, onChange, label, error, options }, ref) => {
     return (
       <S.Container>
         <S.FormItemStyled htmlFor={name}>{label}</S.FormItemStyled>
@@ -13,6 +13,7 @@ export const SelectComponent: React.FC<any> = React.forwardRef(
           showSearch
           placeholder={placeholder}
           optionFilterProp="children"
+          defaultValue={defaultValue}
           onSearch={onSearch}
           onChange={onChange}
           filterOption={(input: any, option: any) =>
