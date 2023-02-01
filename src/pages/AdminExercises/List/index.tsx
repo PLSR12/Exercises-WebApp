@@ -3,29 +3,34 @@ import { Space } from 'antd'
 import * as Atoms from 'components/Atoms'
 import * as Molecules from 'components/Molecules'
 import * as React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { ExercisesContext } from 'store/context/ExercisesContext'
 import * as S from './styles'
 
 export const ListExercises = () => {
-  const navigate = useNavigate()
-  const { isLoading, exercises, handleNew, handleEdit } = React.useContext(ExercisesContext)
-  const [data, setData] = React.useState<any[]>([])
+  const {
+    isLoading,
+    modalConfirmIsOpen,
+    handleConfirmOpened,
+    exercises,
+    handleNew,
+    handleEdit,
+    handleModalConfirmDelete,
+    handleModalCancelDelete,
+  } = React.useContext(ExercisesContext)
 
-  React.useEffect(() => {
-    setData(exercises)
-  }, [exercises])
+  const titleModalConfirmDelete = 'Excluir Exercício'
+  const textModalDelete = 'Deseja realmente excluir o exercício?'
 
   const columns = [
     {
-      title: 'Image',
+      title: 'Imagem',
       dataIndex: 'url',
       render: (t: any, r: any) => (
         <img src={`${r.url}`} alt={`${r.name} imagem`} style={{ width: '150px', height: '15vh' }} />
       ),
     },
     {
-      title: 'Name',
+      title: 'Nome',
       dataIndex: 'name',
       key: 'name',
     },
@@ -35,13 +40,13 @@ export const ListExercises = () => {
       key: 'category',
     },
     {
-      title: 'Action',
+      title: 'Acões',
       dataIndex: 'operation',
       key: 'operation',
       render: (t: any, r: any) => (
         <Space size="middle">
           <EditOutlined onClick={() => handleEdit(r)} />
-          <DeleteOutlined />
+          <DeleteOutlined onClick={() => handleConfirmOpened(r)} />
         </Space>
       ),
     },
@@ -50,8 +55,16 @@ export const ListExercises = () => {
   return (
     <S.Container>
       <Molecules.LoadingModal loading={isLoading} />
+      <Molecules.ModalConfirm
+        isModalOpen={modalConfirmIsOpen}
+        handleOk={handleModalConfirmDelete}
+        handleCancel={handleModalCancelDelete}
+        title={titleModalConfirmDelete}
+        text={textModalDelete}
+        textOk={'Excluir'}
+      />
       <Molecules.TableComponent
-        data={data}
+        data={exercises}
         columns={columns}
         title={'Exercícios'}
         subTitle={'Listagem de Exercícios'}
