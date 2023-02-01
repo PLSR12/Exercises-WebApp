@@ -6,4 +6,7 @@ export const Path = {
   ListExercises: '/list-exercises',
   EditExercise: '/edit-exercise/:id',
   CreateExercise: '/create-exercise',
+  ListCategories: '/list-categories',
+  EditCategory: '/edit-category/:id',
+  CreateCategory: '/create-category',
 }
