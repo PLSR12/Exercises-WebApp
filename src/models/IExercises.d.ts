@@ -1,4 +1,5 @@
 import { AllCategories } from 'models/ICategories'
+import { IListContext } from 'models/IContexts'
 
 interface AllExercises {
   url: string
@@ -16,7 +17,7 @@ interface AllExercises {
 }
 
 interface IExercisesContext {
-  isOpen: boolean
+  isLoading: boolean
   categories: AllCategories[]
   exercisesFiltered: AllExcercises[]
 }
@@ -28,11 +29,8 @@ interface IExerciseContext {
   isCreate: boolean
 }
 
-interface IExercisesListContext {
-  isLoading: boolean
+interface IExercisesListContext extends IListContext {
   exercises: AllExercises[]
-  handleNew: () => void
-  handleEdit: (data: any) => void
 }
 
 export { AllExercises, IExercisesContext, IExercisesListContext, IExerciseContext }
