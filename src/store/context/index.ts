@@ -1,3 +1,5 @@
 export { HomeProvider } from './HomeContext'
 export { ExercisesProvider } from './ExercisesContext'
 export { ExerciseProvider } from './ExerciseContext'
+export { CategoriesProvider } from './CategoriesContext'
+export { CategoryProvider } from './CategoryContext'
