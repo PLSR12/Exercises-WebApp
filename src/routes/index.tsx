@@ -37,6 +37,17 @@ const Routes = () => {
       />
 
       <Route
+        path={Path.ListCategories}
+        element={
+          <PrivateRoute>
+            <LayoutAdmin>
+              <Providers.CategoriesProvider />
+            </LayoutAdmin>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
         path={Path.CreateExercise}
         element={
           <PrivateRoute>
@@ -53,6 +64,28 @@ const Routes = () => {
           <PrivateRoute>
             <LayoutAdmin>
               <Providers.ExerciseProvider />
+            </LayoutAdmin>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path={Path.CreateCategory}
+        element={
+          <PrivateRoute>
+            <LayoutAdmin>
+              <Providers.CategoryProvider />
+            </LayoutAdmin>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path={Path.EditCategory}
+        element={
+          <PrivateRoute>
+            <LayoutAdmin>
+              <Providers.CategoryProvider />
             </LayoutAdmin>
           </PrivateRoute>
         }
