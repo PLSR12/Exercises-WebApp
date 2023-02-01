@@ -4,11 +4,11 @@ import { HomeContext } from 'store/context/HomeContext'
 import * as S from './styles'
 
 export const Home = () => {
-  const { isOpen, categories, exercisesFiltered } = React.useContext(HomeContext)
+  const { isLoading, categories, exercisesFiltered } = React.useContext(HomeContext)
   return (
     <>
       <S.Container>
-        <Molecules.LoadingModal loading={isOpen} />
+        <Molecules.LoadingModal loading={isLoading} />
         <Molecules.Header data={categories} />
         <S.ExercisesContainer>
           {exercisesFiltered.length > 0 ? (
