@@ -9,7 +9,7 @@ import { MenuContext } from './menuContext'
 export const HomeContext = React.createContext<IExercisesContext>({} as IExercisesContext)
 
 export const HomeProvider = () => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(true)
+  const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [categories, setCategories] = React.useState<AllCategories[]>([])
   const [exercises, setExercises] = React.useState<AllExercises[]>([])
   const [exercisesFiltered, setExercisesFiltered] = React.useState<AllExercises[]>([])
@@ -17,26 +17,24 @@ export const HomeProvider = () => {
 
   const getCategories = async () => {
     try {
-      setIsOpen(true)
+      setIsLoading(true)
       const allCategories: any = await CategoryService.getAll()
       const newCategory: any = [{ id: 0, name: 'Todos' }, ...allCategories]
 
       setCategories(newCategory)
-      setIsOpen(false)
-    } catch {
-      setIsOpen(false)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const getExercises = async () => {
     try {
-      setIsOpen(true)
+      setIsLoading(true)
       const allExercises: any = await ExercisesService.getAll()
       setExercises(allExercises)
       setExercisesFiltered(allExercises)
-      setIsOpen(false)
-    } catch {
-      setIsOpen(false)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -62,7 +60,7 @@ export const HomeProvider = () => {
     <>
       <HomeContext.Provider
         value={{
-          isOpen,
+          isLoading,
           categories,
           exercisesFiltered,
         }}

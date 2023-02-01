@@ -12,6 +12,8 @@ export const ExercisesContext = React.createContext<IExercisesListContext>(
 
 export const ExercisesProvider = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
+  const [modalConfirmIsOpen, setModalConfirmIsOpen] = React.useState<boolean>(false)
+  const [dataForAction, setDataForAction] = React.useState<AllExercises | undefined>(undefined)
   const [exercises, setExercises] = React.useState<AllExercises[]>([])
   const navigate = useNavigate()
 
@@ -34,6 +36,24 @@ export const ExercisesProvider = () => {
     navigate(`/edit-exercise/:${data.id}`, { state: data })
   }
 
+  const handleConfirmOpened = (data: any) => {
+    setDataForAction(data)
+    setModalConfirmIsOpen(true)
+  }
+
+  const handleModalConfirmDelete = async () => {
+    await ExercisesService.del(dataForAction?.id)
+
+    setTimeout(() => {
+      setModalConfirmIsOpen(false)
+      getExercises()
+    })
+  }
+
+  const handleModalCancelDelete = () => {
+    setModalConfirmIsOpen(false)
+  }
+
   React.useEffect(() => {
     getExercises()
   }, [])
@@ -43,6 +63,10 @@ export const ExercisesProvider = () => {
       <ExercisesContext.Provider
         value={{
           isLoading,
+          modalConfirmIsOpen,
+          handleConfirmOpened,
+          handleModalConfirmDelete,
+          handleModalCancelDelete,
           exercises,
           handleNew,
           handleEdit,

@@ -30,6 +30,9 @@ export const UserProvider = ({ children }: IUserProvider) => {
   const logoutUser = () => {
     StorageService.setUserLoggedOf()
     setUser(undefined)
+    setTimeout(() => {
+      navigate('/login')
+    }, 1000)
   }
 
   React.useEffect(() => {
