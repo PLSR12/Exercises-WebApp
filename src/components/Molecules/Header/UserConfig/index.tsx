@@ -3,6 +3,7 @@ import { Path } from 'common/config/pathsRoutes'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from 'store/context/UserContext'
+import { StorageService } from 'store/services'
 import * as S from './styles'
 
 interface UserConfigProps {
@@ -16,6 +17,7 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
   const [initials, setInitials] = useState<string>('')
   const navigate = useNavigate()
   const { logoutUser, user } = useContext(UserContext)
+  const userParsed = StorageService.getDataUser()
 
   const keyPress = useCallback(
     (e: { key: string }) => {
@@ -61,8 +63,8 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
   }, [keyPress])
 
   useEffect(() => {
-    getInitials(user?.name || '')
-  }, [user])
+    getInitials(userParsed?.name || '')
+  }, [userParsed])
 
   return (
     <S.Container>
@@ -78,8 +80,8 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
         >
           <S.ProfileContainer>
             <S.HeaderProfile>
-              <h4>{user?.name}</h4>
-              <p>{user?.email}</p>
+              <h4>{userParsed?.name}</h4>
+              <p>{userParsed?.email}</p>
             </S.HeaderProfile>
 
             <S.BodyProfile>
@@ -87,7 +89,7 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
                 <UserOutlined /> <p>Perfil</p>
               </button>
             </S.BodyProfile>
-            {user?.admin && (
+            {userParsed?.admin && (
               <S.FooterProfile>
                 <button type="button" onClick={() => redirectAdmin()}>
                   <AuditOutlined /> <p>Admin</p>
