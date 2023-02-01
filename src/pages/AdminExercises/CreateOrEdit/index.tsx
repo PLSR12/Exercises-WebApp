@@ -26,7 +26,6 @@ export const CreateOrEditExercise = () => {
       ]
     : []
   const [fileList, setFileList] = React.useState<any[]>(exerciseFile)
-  const [file, setFile] = React.useState<any>()
   const { isLoading, categories, onSubmit, isCreate } = React.useContext(ExerciseContext)
 
   React.useEffect(() => {
@@ -50,7 +49,7 @@ export const CreateOrEditExercise = () => {
   })
 
   const OnSubmitForm = async (values: any) => {
-    await onSubmit(values, file)
+    await onSubmit(values, fileList)
   }
 
   const onSearch = (value: string) => {
@@ -133,7 +132,6 @@ export const CreateOrEditExercise = () => {
               />
             )}
           />
-          <input type="file" onChange={(e: any) => setFile(e.target.files[0]?.name)} />
           <Atoms.InputImage
             name="imagem"
             label="Imagem do exercício"
@@ -144,12 +142,16 @@ export const CreateOrEditExercise = () => {
           />
         </S.BoxAreaForm>
         <div className="buttonsStepper" style={{ marginTop: '40px' }}>
-          <Atoms.ButtonComponent type="button" size={'large'} onClick={handleCancel}>
+          <Atoms.ButtonComponent
+            type="button"
+            size={'large'}
+            onClick={handleCancel}
+          >
             Cancelar
           </Atoms.ButtonComponent>
 
           <Atoms.ButtonComponent type="submit" size={'large'}>
-            {isCreate ? 'Criar' : 'Editar'}
+            {isCreate ? 'Cadastrar' : 'Editar'}
           </Atoms.ButtonComponent>
         </div>
       </form>
