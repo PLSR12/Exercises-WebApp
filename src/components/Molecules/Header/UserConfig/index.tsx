@@ -1,6 +1,7 @@
 import { AuditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { Path } from 'common/config/pathsRoutes'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { CgGym } from 'react-icons/cg'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from 'store/context/UserContext'
 import { StorageService } from 'store/services'
@@ -48,8 +49,12 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
     setIsVisible(!isVisible)
   }
 
-  const redirectAdmin = () => {
+  const redirectToAdmin = () => {
     navigate(Path.ListExercises)
+  }
+
+  const redirectToPlanningExercise = () => {
+    navigate(Path.PlanningExercise)
   }
 
   useEffect(() => {
@@ -89,16 +94,21 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
                 <UserOutlined /> <p>Perfil</p>
               </button>
             </S.BodyProfile>
+            <S.BodyProfile>
+              <button type="button" onClick={redirectToPlanningExercise}>
+                <CgGym /> <p>Montar Treino</p>
+              </button>
+            </S.BodyProfile>
             {userParsed?.admin && (
               <S.FooterProfile>
-                <button type="button" onClick={() => redirectAdmin()}>
+                <button type="button" onClick={redirectToAdmin}>
                   <AuditOutlined /> <p>Admin</p>
                 </button>
               </S.FooterProfile>
             )}
 
             <S.FooterProfile>
-              <button type="button" className="btnLogout" onClick={() => logoutUser()}>
+              <button type="button" className="btnLogout" onClick={logoutUser}>
                 <LogoutOutlined /> <p>Sair</p>
               </button>
             </S.FooterProfile>
