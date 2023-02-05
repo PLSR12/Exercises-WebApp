@@ -2,6 +2,7 @@ import { MenuUnfoldOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Path } from 'common/config/pathsRoutes'
 import * as React from 'react'
+import { AiOutlineHome } from 'react-icons/ai'
 import { BiCategory } from 'react-icons/bi'
 import { CgGym } from 'react-icons/cg'
 import { useNavigate } from 'react-router-dom'
@@ -46,18 +47,23 @@ export const MenuAdmin = () => {
     setCollapsed(!collapsed)
   }
 
-  const redirectExercises = () => {
+  const redirectToExercises = () => {
     navigate(Path.ListExercises)
   }
 
-  const redirectCategories = () => {
+  const redirectToCategories = () => {
     navigate(Path.ListCategories)
+  }
+
+  const redirectToHome = () => {
+    navigate(Path.Home)
   }
 
   const items: MenuItem[] = [
     getItem('Menu', '1', <MenuUnfoldOutlined onClick={toggleCollapsed} />),
-    getItem('Exercícios', '2', <CgGym onClick={redirectExercises} />),
-    getItem('Categorias', '3', <BiCategory onClick={redirectCategories} />),
+    getItem('Exercícios', '2', <CgGym onClick={redirectToExercises} />),
+    getItem('Categorias', '3', <BiCategory onClick={redirectToCategories} />),
+    getItem('Home', '4', <AiOutlineHome onClick={redirectToHome} />),
   ]
 
   return (
