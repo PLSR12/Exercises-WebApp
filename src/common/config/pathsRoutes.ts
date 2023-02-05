@@ -2,6 +2,7 @@ export const Path = {
   Login: '/login',
   Home: '/',
   Exercise: '/exercise',
+  PlanningExercise: '/planning-exercise',
   Admin: '/admin',
   ListExercises: '/list-exercises',
   EditExercise: '/edit-exercise/:id',
