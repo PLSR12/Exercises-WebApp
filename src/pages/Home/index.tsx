@@ -9,7 +9,6 @@ export const Home = () => {
     <>
       <S.Container>
         <Molecules.LoadingModal loading={isLoading} />
-        <Molecules.Header data={categories} />
         <S.ExercisesContainer>
           {exercisesFiltered.length > 0 ? (
             exercisesFiltered.map((exercise) => (
