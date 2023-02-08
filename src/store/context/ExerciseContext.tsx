@@ -28,10 +28,10 @@ export const ExerciseProvider = () => {
     }
   }
 
-  const onSubmit = async (values: any, file: any) => {
+  const onSubmit = async (values: any, file: any[]) => {
     const { name, objective, linkvideo, categoryId, description } = values
 
-    console.log(values)
+    console.log(file)
 
     const exerciseFormData: any = new FormData()
 
@@ -40,7 +40,7 @@ export const ExerciseProvider = () => {
     exerciseFormData.append('linkvideo', linkvideo)
     exerciseFormData.append('category_id', categoryId)
     exerciseFormData.append('description', description)
-    exerciseFormData.append('file', file)
+    exerciseFormData.append('file', file[0])
 
     if (!isCreate) exerciseFormData.id = splitedId
 
