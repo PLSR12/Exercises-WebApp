@@ -1,5 +1,4 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { UploadProps } from 'antd'
 import { Path } from 'common/config/pathsRoutes'
 import { formatDataSelectComponent } from 'common/utils/formatDataSelect'
 import * as Atoms from 'components/Atoms'
@@ -15,17 +14,8 @@ export const CreateOrEditExercise = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const exercise = location.state
-  const exerciseFile = exercise
-    ? [
-        {
-          uid: '-1',
-          name: exercise?.name,
-          status: 'done',
-          url: exercise?.file,
-        },
-      ]
-    : []
-  const [fileList, setFileList] = React.useState<any[]>(exerciseFile)
+  const [file, setFile] = React.useState<any>([])
+
   const { isLoading, categories, onSubmit, isCreate } = React.useContext(ExerciseContext)
 
   React.useEffect(() => {
@@ -34,11 +24,8 @@ export const CreateOrEditExercise = () => {
     }
   }, [])
 
-  const onChangeInput: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    setFileList(newFileList)
-  }
-
   const {
+    register,
     reset,
     handleSubmit,
     setValue,
@@ -49,8 +36,10 @@ export const CreateOrEditExercise = () => {
   })
 
   const OnSubmitForm = async (values: any) => {
-    await onSubmit(values, fileList)
+    await onSubmit(values, file)
   }
+
+  console.log(file)
 
   const onSearch = (value: string) => {
     console.log('search:', value)
@@ -58,6 +47,13 @@ export const CreateOrEditExercise = () => {
 
   const handleCancel = () => {
     navigate(Path.ListExercises)
+  }
+
+  const handleDrop = (acceptedFiles: any[]) => {
+    setFile(acceptedFiles.map((file) => file))
+    if (exercise !== undefined) {
+      //  exercise.image: ''
+    }
   }
 
   return (
@@ -123,7 +119,7 @@ export const CreateOrEditExercise = () => {
               <Atoms.SelectComponent
                 {...field}
                 label="Categoria"
-                defaultValue={exercise?.categoryId}
+                defaultValue={exercise?.categoryId || 'Selecione uma Categoria'}
                 options={formatDataSelectComponent(categories)}
                 placeholder="Selecione uma Categoria:"
                 error={errors.categoryId}
@@ -133,20 +129,15 @@ export const CreateOrEditExercise = () => {
             )}
           />
           <Atoms.InputImage
-            name="imagem"
+            handleDrop={handleDrop}
+            file={file}
             label="Imagem do exercício"
             error={errors.file}
-            onChange={onChangeInput}
-            fileList={fileList}
-            maximumFiles={1}
+            {...register('file')}
           />
         </S.BoxAreaForm>
         <div className="buttonsStepper" style={{ marginTop: '40px' }}>
-          <Atoms.ButtonComponent
-            type="button"
-            size={'large'}
-            onClick={handleCancel}
-          >
+          <Atoms.ButtonComponent type="button" size={'large'} onClick={handleCancel}>
             Cancelar
           </Atoms.ButtonComponent>
 
