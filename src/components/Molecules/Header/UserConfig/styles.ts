@@ -78,45 +78,6 @@ export const HeaderProfile = styled.div`
 
 export const BodyProfile = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 8px 0;
-
-  a {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    border: none;
-    padding: 10px 16px;
-    cursor: pointer;
-
-    p {
-      font-weight: ${(props) => props.theme.fontWeight.medium};
-      font-size: ${(props) => props.theme.fontSize.medium};
-      color: #454f5b;
-      padding-left: 6px;
-    }
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    background: transparent;
-    border: none;
-    padding: 10px 16px;
-    opacity: 0.5;
-    cursor: not-allowed;
-
-    p {
-      font-weight: ${(props) => props.theme.fontWeight.medium};
-      font-size: ${(props) => props.theme.fontSize.medium};
-      color: #454f5b;
-      padding-left: 6px;
-    }
-  }
-`
-
-export const FooterProfile = styled.div`
-  display: flex;
   align-items: center;
   border-top: 1px solid #f4f6f8;
   padding: 8px 0;
@@ -130,12 +91,12 @@ export const FooterProfile = styled.div`
     border: none;
     cursor: pointer;
     padding: 10px 16px;
-
-    p {
-      font-weight: ${(props) => props.theme.fontWeight.medium};
-      font-size: ${(props) => props.theme.fontSize.medium};
-      color: #454f5b;
-      padding-left: 6px;
-    }
+    font-weight: ${(props) => props.theme.fontWeight.medium};
+    font-size: ${(props) => props.theme.fontSize.medium};
+    color: ${(props) => props.theme.color.black};
+    gap: 5px;
+  }
+  button:disabled {
+    color: ${(props) => props.theme.color.primary_gray};
   }
 `
