@@ -4,6 +4,7 @@ import { AllExercises, IExercisesContext } from 'models/IExercises'
 import * as Pages from 'pages'
 import * as React from 'react'
 import { CategoryService, ExercisesService } from 'store/services'
+import { TemplateHome } from 'templates/Home'
 import { MenuContext } from './menuContext'
 
 export const HomeContext = React.createContext<IExercisesContext>({} as IExercisesContext)
@@ -65,7 +66,9 @@ export const HomeProvider = () => {
           exercisesFiltered,
         }}
       >
-        <Pages.Home />
+        <TemplateHome categories={categories}>
+          <Pages.Home />
+        </TemplateHome>
       </HomeContext.Provider>
     </>
   )
