@@ -91,27 +91,27 @@ const UserConfig = ({ isVisible, setIsVisible }: UserConfigProps) => {
 
             <S.BodyProfile>
               <button type="button" disabled>
-                <UserOutlined /> <p>Perfil</p>
+                <UserOutlined /> Perfil
               </button>
             </S.BodyProfile>
             <S.BodyProfile>
               <button type="button" onClick={redirectToPlanningExercise}>
-                <CgGym /> <p>Montar Treino</p>
+                <CgGym /> Montar Treino
               </button>
             </S.BodyProfile>
             {userParsed?.admin && (
-              <S.FooterProfile>
+              <S.BodyProfile>
                 <button type="button" onClick={redirectToAdmin}>
-                  <AuditOutlined /> <p>Admin</p>
+                  <AuditOutlined /> Admin
                 </button>
-              </S.FooterProfile>
+              </S.BodyProfile>
             )}
 
-            <S.FooterProfile>
+            <S.BodyProfile>
               <button type="button" className="btnLogout" onClick={logoutUser}>
-                <LogoutOutlined /> <p>Sair</p>
+                <LogoutOutlined /> Sair
               </button>
-            </S.FooterProfile>
+            </S.BodyProfile>
           </S.ProfileContainer>
         </S.NavProfileOpitions>
       </>
