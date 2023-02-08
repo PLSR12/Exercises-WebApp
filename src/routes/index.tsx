@@ -1,7 +1,7 @@
 import { Path } from 'common/config/pathsRoutes'
-import { LayoutAdmin } from 'pages/Admin'
 import { Route, Routes as RoutesWrapper } from 'react-router-dom'
 import * as Providers from 'store/context'
+import { TemplateAdmin } from 'templates/Admin'
 import * as Pages from '../pages'
 import PrivateRoute from './private-routes'
 
@@ -26,12 +26,21 @@ const Routes = () => {
       />
 
       <Route
+        path={Path.PlanningExercise}
+        element={
+          <PrivateRoute>
+            <Providers.PlanningExerciseProvider />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
         path={Path.ListExercises}
         element={
           <PrivateRoute>
-            <LayoutAdmin>
+            <TemplateAdmin>
               <Providers.ExercisesProvider />
-            </LayoutAdmin>
+            </TemplateAdmin>
           </PrivateRoute>
         }
       />
@@ -40,9 +49,9 @@ const Routes = () => {
         path={Path.ListCategories}
         element={
           <PrivateRoute>
-            <LayoutAdmin>
+            <TemplateAdmin>
               <Providers.CategoriesProvider />
-            </LayoutAdmin>
+            </TemplateAdmin>
           </PrivateRoute>
         }
       />
@@ -51,9 +60,9 @@ const Routes = () => {
         path={Path.CreateExercise}
         element={
           <PrivateRoute>
-            <LayoutAdmin>
+            <TemplateAdmin>
               <Providers.ExerciseProvider />
-            </LayoutAdmin>
+            </TemplateAdmin>
           </PrivateRoute>
         }
       />
@@ -62,9 +71,9 @@ const Routes = () => {
         path={Path.EditExercise}
         element={
           <PrivateRoute>
-            <LayoutAdmin>
+            <TemplateAdmin>
               <Providers.ExerciseProvider />
-            </LayoutAdmin>
+            </TemplateAdmin>
           </PrivateRoute>
         }
       />
@@ -73,9 +82,9 @@ const Routes = () => {
         path={Path.CreateCategory}
         element={
           <PrivateRoute>
-            <LayoutAdmin>
+            <TemplateAdmin>
               <Providers.CategoryProvider />
-            </LayoutAdmin>
+            </TemplateAdmin>
           </PrivateRoute>
         }
       />
@@ -84,9 +93,9 @@ const Routes = () => {
         path={Path.EditCategory}
         element={
           <PrivateRoute>
-            <LayoutAdmin>
+            <TemplateAdmin>
               <Providers.CategoryProvider />
-            </LayoutAdmin>
+            </TemplateAdmin>
           </PrivateRoute>
         }
       />
