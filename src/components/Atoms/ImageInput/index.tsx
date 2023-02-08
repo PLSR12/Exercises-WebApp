@@ -1,63 +1,35 @@
-import { Upload } from 'antd'
-import ImgCrop from 'antd-img-crop'
-import type { RcFile, UploadFile } from 'antd/es/upload/interface'
+import Dropzone from 'react-dropzone'
 import { ErrorMessage } from '../ErrorMessage'
 import * as S from './styles'
 
-/*
-{
-      uid: string
-      name: string
-      status: string
-      url: string
-    }
-*/
-interface InputImageProps {
-  fileList: any[]
-  onChange: any
-  maximumFiles: number
-  name: string
-  label: string
-  error: any
-}
-
-export const InputImage = ({
-  fileList,
-  onChange,
-  maximumFiles,
-  name,
-  label,
-  error,
-}: InputImageProps) => {
-  const onPreview = async (file: UploadFile) => {
-    let src = file.url as string
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file.originFileObj as RcFile)
-        reader.onload = () => resolve(reader.result as string)
-      })
-    }
-    const image = new Image()
-    image.src = src
-    const imgWindow = window.open(src)
-    imgWindow?.document.write(image.outerHTML)
-  }
-
+export const InputImage = ({ name, label, error, handleDrop, file, ref, ...props }: any) => {
   return (
     <S.Container>
       <S.FormItemStyled htmlFor={name}>{label}</S.FormItemStyled>
-      <ImgCrop rotate>
-        <Upload
-          listType="picture-card"
-          fileList={fileList}
-          onChange={onChange}
-          onPreview={onPreview}
-          accept="image/*"
-        >
-          {fileList.length < maximumFiles && '+ Upload'}
-        </Upload>
-      </ImgCrop>
+      <Dropzone onDrop={handleDrop}>
+        {({ getRootProps, getInputProps }) => (
+          <div {...getRootProps({ className: 'dropzone' })}>
+            <input
+              type="file"
+              ref={ref}
+              {...props}
+              name={name}
+              id={name}
+              accept="image/*"
+              {...getInputProps()}
+            />
+            {file.length > 0 ? (
+              <p>
+                {file.map((file: any) => (
+                  <li key={file}>{file?.name}</li>
+                ))}
+              </p>
+            ) : (
+              <p> Arraste sua imagem ou clique e selecione:</p>
+            )}
+          </div>
+        )}
+      </Dropzone>
       {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
     </S.Container>
   )
